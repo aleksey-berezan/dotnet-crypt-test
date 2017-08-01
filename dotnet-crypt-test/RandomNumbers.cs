@@ -7,7 +7,7 @@ namespace dotnet_crypt_test
     [TestFixture]
     public class RandomNumbers
     {
-        private static byte[] GenerateRandomNumber(int bytesCount)
+        private static byte[] GenerateRandomBytes(int bytesCount)
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
@@ -20,13 +20,21 @@ namespace dotnet_crypt_test
         [Test]
         public void Sample1()
         {
-            byte[] r = null;
-            r = GenerateRandomNumber(4); Console.WriteLine(BitConverter.ToString(r) + ":" + Convert.ToBase64String(r));
-            r = GenerateRandomNumber(4); Console.WriteLine(BitConverter.ToString(r) + ":" + Convert.ToBase64String(r));
-            r = GenerateRandomNumber(4); Console.WriteLine(BitConverter.ToString(r) + ":" + Convert.ToBase64String(r));
-            r = GenerateRandomNumber(4); Console.WriteLine(BitConverter.ToString(r) + ":" + Convert.ToBase64String(r));
-            r = GenerateRandomNumber(4); Console.WriteLine(BitConverter.ToString(r) + ":" + Convert.ToBase64String(r));
-            r = GenerateRandomNumber(4); Console.WriteLine(BitConverter.ToString(r) + ":" + Convert.ToBase64String(r));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+        }
+
+        private static void PrintBytes(byte[] r)
+        {
+            Console.WriteLine($"{BitConverter.ToInt32(r, 0)}" +
+                              $":{BitConverter.ToString(r)}" +
+                              $":{Convert.ToBase64String(r)}");
         }
     }
 }
