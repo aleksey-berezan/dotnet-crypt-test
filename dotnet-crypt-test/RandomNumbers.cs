@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using NUnit.Framework;
 
 namespace dotnet_crypt_test
@@ -20,21 +19,14 @@ namespace dotnet_crypt_test
         [Test]
         public void Sample1()
         {
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-            PrintBytes(GenerateRandomBytes(8));
-        }
-
-        private static void PrintBytes(byte[] r)
-        {
-            Console.WriteLine($"{BitConverter.ToInt32(r, 0)}" +
-                              $":{BitConverter.ToString(r)}" +
-                              $":{Convert.ToBase64String(r)}");
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
+            Utils.PrintBytes(GenerateRandomBytes(8));
         }
     }
 }
