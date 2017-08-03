@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using NUnit.Framework;
+using static dotnet_crypt_test.Utils;
 
 namespace dotnet_crypt_test
 {
@@ -19,11 +20,11 @@ namespace dotnet_crypt_test
         public void Sample1()
         {
             int baseRounds = 50_000;
-            Utils.PrintBytes(Utils.Measure(() => ComputeHash("Hello World!", Utils.GenerateSalt(128), baseRounds * 1)));
-            Utils.PrintBytes(Utils.Measure(() => ComputeHash("Hello World!", Utils.GenerateSalt(128), baseRounds * 2)));
-            Utils.PrintBytes(Utils.Measure(() => ComputeHash("Hello World!", Utils.GenerateSalt(128), baseRounds * 3)));
-            Utils.PrintBytes(Utils.Measure(() => ComputeHash("Hello World!", Utils.GenerateSalt(128), baseRounds * 4)));
-            Utils.PrintBytes(Utils.Measure(() => ComputeHash("Hello World!", Utils.GenerateSalt(128), baseRounds * 5)));
+            PrintBytes(Measure(() => ComputeHash("Hello World!", GenerateSalt(128), baseRounds * 1)));
+            PrintBytes(Measure(() => ComputeHash("Hello World!", GenerateSalt(128), baseRounds * 2)));
+            PrintBytes(Measure(() => ComputeHash("Hello World!", GenerateSalt(128), baseRounds * 3)));
+            PrintBytes(Measure(() => ComputeHash("Hello World!", GenerateSalt(128), baseRounds * 4)));
+            PrintBytes(Measure(() => ComputeHash("Hello World!", GenerateSalt(128), baseRounds * 5)));
         }
     }
 }

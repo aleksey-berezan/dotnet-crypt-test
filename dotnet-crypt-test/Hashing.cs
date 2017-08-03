@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using NUnit.Framework;
+using static dotnet_crypt_test.Utils;
 
 namespace dotnet_crypt_test
 {
@@ -17,11 +18,11 @@ namespace dotnet_crypt_test
         [Test]
         public void Sample1()
         {
-            Utils.PrintBytes(ComputeHashMD5("Hello World!"));
-            Utils.PrintBytes(ComputeHashSHA256("Hello World!"));
-            Utils.PrintBytes(ComputeHashSHA512("Hello World!"));
-            Utils.PrintBytes(ComputeHashSHA512Cng("Hello World!"));
-            Utils.PrintBytes(ComputeHashSHA512Managed("Hello World!"));
+            PrintBytes(ComputeHashMD5("Hello World!"));
+            PrintBytes(ComputeHashSHA256("Hello World!"));
+            PrintBytes(ComputeHashSHA512("Hello World!"));
+            PrintBytes(ComputeHashSHA512Cng("Hello World!"));
+            PrintBytes(ComputeHashSHA512Managed("Hello World!"));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using NUnit.Framework;
+using static dotnet_crypt_test.Utils;
 
 namespace dotnet_crypt_test
 {
@@ -19,14 +20,14 @@ namespace dotnet_crypt_test
         [Test]
         public void Sample1()
         {
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
-            Utils.PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
+            PrintBytes(GenerateRandomBytes(8));
         }
     }
 }
