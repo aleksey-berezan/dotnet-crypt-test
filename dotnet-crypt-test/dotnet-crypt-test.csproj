@@ -43,10 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PBKDF2.cs" />
     <Compile Include="Hashing.cs" />
     <Compile Include="HMAC.cs" />
     <Compile Include="RandomNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaltHashing.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
