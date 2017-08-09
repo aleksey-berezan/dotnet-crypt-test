@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encryption.cs" />
     <Compile Include="PBKDF2.cs" />
     <Compile Include="Hashing.cs" />
     <Compile Include="HMAC.cs" />

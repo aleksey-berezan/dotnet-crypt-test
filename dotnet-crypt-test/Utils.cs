@@ -9,10 +9,12 @@ namespace dotnet_crypt_test
     {
         public static byte[] GetBytes(string s) => Encoding.Default.GetBytes(s);
 
-        public static void PrintBytes(byte[] r) => Console.WriteLine($"{r.Length}" +
-                                                                     $" :: {BitConverter.ToInt32(r, 0)}" +
-                                                                     $" :: {BitConverter.ToString(r).Replace("-", "").ToLower()}" +
-                                                                     $" :: {Convert.ToBase64String(r)}");
+        public static void PrintBytes(byte[] r) => Console.WriteLine(GetBytesString(r));
+
+        public static string GetBytesString(byte[] r) => $"{r.Length}" +
+                                                         $" :: {BitConverter.ToInt32(r, 0)}" +
+                                                         $" :: {BitConverter.ToString(r).Replace("-", "").ToLower()}" +
+                                                         $" :: {Convert.ToBase64String(r)}";
 
         public static byte[] GenerateSalt(int length = 32)
         {
