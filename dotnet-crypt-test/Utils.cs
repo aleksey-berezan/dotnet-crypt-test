@@ -9,6 +9,8 @@ namespace dotnet_crypt_test
     {
         public static byte[] GetBytes(string s) => Encoding.Default.GetBytes(s);
 
+        public static string GetString(byte[] bytes) => Encoding.Default.GetString(bytes, 0, bytes.Length);
+
         public static void PrintBytes(byte[] r) => Console.WriteLine(GetBytesString(r));
 
         public static string GetBytesString(byte[] r) => $"{r.Length}" +

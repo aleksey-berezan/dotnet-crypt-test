@@ -8,27 +8,30 @@ using static dotnet_crypt_test.Utils;
 namespace dotnet_crypt_test
 {
     [TestFixture]
-    public class Encryption
+    public class SymEncryption
     {
+        private const int KeySize = 256;
+        private const int BlockSize = 128;
+
         private static Rfc2898DeriveBytes GenerateKey(byte[] keyBytes, byte[] salt) => new Rfc2898DeriveBytes(keyBytes, salt, 1000);
 
-        private static RijndaelManaged GetRijndael(byte[] key, byte[] salt, int keySize, int blockSize)
+        private static RijndaelManaged GetRijndael(byte[] key, byte[] salt)
         {
             Rfc2898DeriveBytes deriveKeyBytes = GenerateKey(key, salt);
             return new RijndaelManaged
             {
-                KeySize = keySize,
-                BlockSize = blockSize,
-                Key = deriveKeyBytes.GetBytes(keySize / 8),
-                IV = deriveKeyBytes.GetBytes(blockSize / 8),
+                KeySize = KeySize,
+                BlockSize = BlockSize,
+                Key = deriveKeyBytes.GetBytes(KeySize / 8),
+                IV = deriveKeyBytes.GetBytes(BlockSize / 8),
                 Mode = CipherMode.CBC,
                 Padding = PaddingMode.PKCS7,
             };
         }
 
-        private static byte[] Encrypt(string data, byte[] key, byte[] salt, int keySize, int blockSize)
+        private static byte[] Encrypt(string data, byte[] key, byte[] salt)
         {
-            RijndaelManaged aes = GetRijndael(key, salt, keySize, blockSize);
+            RijndaelManaged aes = GetRijndael(key, salt);
             using (var ms = new MemoryStream())
             {
                 using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
@@ -41,9 +44,9 @@ namespace dotnet_crypt_test
             }
         }
 
-        private static string Decrypt(byte[] data, byte[] key, byte[] salt, int keySize, int blockSize)
+        private static string Decrypt(byte[] data, byte[] key, byte[] salt)
         {
-            RijndaelManaged aes = GetRijndael(key, salt, keySize, blockSize);
+            RijndaelManaged aes = GetRijndael(key, salt);
             using (var ms = new MemoryStream())
             {
                 using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
@@ -59,19 +62,17 @@ namespace dotnet_crypt_test
         [Test]
         public void Sample1()
         {
-            const int keySize = 256;
-            const int blockSize = 128;
-            byte[] salt = GenerateSalt(keySize);
+            byte[] salt = GenerateSalt(KeySize);
             byte[] key = GetBytes("mypassword");
 
             void Run(string s)
             {
                 Console.WriteLine($"Original: {s}");
 
-                byte[] encrypted = Encrypt(s, key, salt, keySize, blockSize);
+                byte[] encrypted = Encrypt(s, key, salt);
                 Console.WriteLine($"Encrypted: {GetBytesString(encrypted)}");
 
-                string decrypted = Decrypt(encrypted, key, salt, keySize, blockSize);
+                string decrypted = Decrypt(encrypted, key, salt);
                 Console.WriteLine($"Decrypted: {decrypted}");
                 Console.WriteLine("+-------------------------------------------------------+");
             }
