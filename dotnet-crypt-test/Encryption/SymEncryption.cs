@@ -3,9 +3,8 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using NUnit.Framework;
-using static dotnet_crypt_test.Utils;
 
-namespace dotnet_crypt_test
+namespace dotnet_crypt_test.Encryption
 {
     [TestFixture]
     public class SymEncryption
@@ -36,7 +35,7 @@ namespace dotnet_crypt_test
             {
                 using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
                 {
-                    byte[] bytes = GetBytes(data);
+                    byte[] bytes = Utils.GetBytes(data);
                     cs.Write(bytes, 0, bytes.Length);
                     cs.FlushFinalBlock();
                     return ms.ToArray();
@@ -62,15 +61,15 @@ namespace dotnet_crypt_test
         [Test]
         public void Sample1()
         {
-            byte[] salt = GenerateSalt(KeySize);
-            byte[] key = GetBytes("mypassword");
+            byte[] salt = Utils.GenerateSalt(KeySize);
+            byte[] key = Utils.GetBytes("mypassword");
 
             void Run(string s)
             {
                 Console.WriteLine($"Original: {s}");
 
                 byte[] encrypted = Encrypt(s, key, salt);
-                Console.WriteLine($"Encrypted: {GetBytesString(encrypted)}");
+                Console.WriteLine($"Encrypted: {Utils.GetBytesString(encrypted)}");
 
                 string decrypted = Decrypt(encrypted, key, salt);
                 Console.WriteLine($"Decrypted: {decrypted}");

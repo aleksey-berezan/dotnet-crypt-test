@@ -1,12 +1,11 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using NUnit.Framework;
-using static System.Console;
-using static dotnet_crypt_test.Utils;
 
-namespace dotnet_crypt_test
+namespace dotnet_crypt_test.Signatures
 {
     [TestFixture]
-    public class Signature
+    public class BasicExamples
     {
         private const int KeySize = 2048;
 
@@ -28,7 +27,7 @@ namespace dotnet_crypt_test
                 rsa.ImportParameters(privateKey);
                 var formatter = new RSAPKCS1SignatureFormatter(rsa);
                 formatter.SetHashAlgorithm(HashAlgorithmName.SHA256.Name);
-                return formatter.CreateSignature(HashSha256(GetBytes(data)));
+                return formatter.CreateSignature(Utils.HashSha256(Utils.GetBytes(data)));
             }
         }
 
@@ -39,7 +38,7 @@ namespace dotnet_crypt_test
                 rsa.ImportParameters(publicKey);
                 var deformatter = new RSAPKCS1SignatureDeformatter(rsa);
                 deformatter.SetHashAlgorithm(HashAlgorithmName.SHA256.Name);
-                return deformatter.VerifySignature(HashSha256(GetBytes(data)), signature);
+                return deformatter.VerifySignature(Utils.HashSha256(Utils.GetBytes(data)), signature);
             }
         }
 
@@ -48,14 +47,14 @@ namespace dotnet_crypt_test
         {
             void Run(string data, string otherData)
             {
-                WriteLine($"      Data: {data}");
-                WriteLine($"Other Data: {otherData}");
+                Console.WriteLine($"      Data: {data}");
+                Console.WriteLine($"Other Data: {otherData}");
                 (RSAParameters publicKey, RSAParameters privateKey) = GenerateKeys();
                 byte[] signature = SignData(data, privateKey);
-                WriteLine($"Signature: {GetBytesString(signature)}");
+                Console.WriteLine($"Signature: {Utils.GetBytesString(signature)}");
                 bool isValid = VerifySignature(otherData, publicKey, signature);
-                WriteLine($"Data match: {isValid}");
-                WriteLine("+---------------------------------------+");
+                Console.WriteLine($"Data match: {isValid}");
+                Console.WriteLine("+---------------------------------------+");
             }
 
             Run("Hello world", "Hello world");

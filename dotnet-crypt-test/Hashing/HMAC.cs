@@ -1,8 +1,7 @@
 ﻿using System.Security.Cryptography;
 using NUnit.Framework;
-using static dotnet_crypt_test.Utils;
 
-namespace dotnet_crypt_test
+namespace dotnet_crypt_test.Hashing
 {
     [TestFixture]
     public class HMAC
@@ -21,7 +20,7 @@ namespace dotnet_crypt_test
         {
             using (var hmac = new HMACSHA512(key))
             {
-                return hmac.ComputeHash(GetBytes(data));
+                return hmac.ComputeHash(Utils.GetBytes(data));
             }
         }
 
@@ -29,8 +28,8 @@ namespace dotnet_crypt_test
         public static void Sample1()
         {
             byte[] key = GenerateRandomBytes(512);
-            PrintBytes(ComputeHMACSHA512("Hello World!", key));
-            PrintBytes(ComputeHMACSHA512("Hello World!2", key));
+            Utils.PrintBytes(ComputeHMACSHA512("Hello World!", key));
+            Utils.PrintBytes(ComputeHMACSHA512("Hello World!2", key));
         }
     }
 }

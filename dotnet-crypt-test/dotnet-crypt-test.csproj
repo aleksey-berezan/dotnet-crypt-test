@@ -46,19 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsymEncryption.cs" />
-    <Compile Include="Signature.cs" />
-    <Compile Include="SymEncryption.cs" />
-    <Compile Include="PBKDF2.cs" />
-    <Compile Include="Hashing.cs" />
-    <Compile Include="HMAC.cs" />
-    <Compile Include="RandomNumbers.cs" />
+    <Compile Include="Encryption\AsymEncryption.cs" />
+    <Compile Include="Signatures\BasicExamples.cs" />
+    <Compile Include="Encryption\SymEncryption.cs" />
+    <Compile Include="Hashing\PBKDF2.cs" />
+    <Compile Include="Hashing\BasicExamples.cs" />
+    <Compile Include="Hashing\HMAC.cs" />
+    <Compile Include="RandomNumbers\BasicExamples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaltHashing.cs" />
+    <Compile Include="Hashing\SaltHashing.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,9 +1,8 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using NUnit.Framework;
-using static System.Console;
-using static dotnet_crypt_test.Utils;
 
-namespace dotnet_crypt_test
+namespace dotnet_crypt_test.Encryption
 {
     [TestFixture]
     public class AsymEncryption
@@ -26,7 +25,7 @@ namespace dotnet_crypt_test
             using (var rsa = new RSACryptoServiceProvider(KeySize))
             {
                 rsa.ImportParameters(parameters);
-                return rsa.Encrypt(GetBytes(data), RSAEncryptionPadding.Pkcs1);
+                return rsa.Encrypt(Utils.GetBytes(data), RSAEncryptionPadding.Pkcs1);
             }
         }
 
@@ -36,7 +35,7 @@ namespace dotnet_crypt_test
             {
                 rsa.ImportParameters(parameters);
                 byte[] decrypted = rsa.Decrypt(bytes, RSAEncryptionPadding.Pkcs1);
-                return GetString(decrypted);
+                return Utils.GetString(decrypted);
             }
         }
 
@@ -47,12 +46,12 @@ namespace dotnet_crypt_test
             {
                 (RSAParameters publicKey, RSAParameters privateKey) = GenerateKeys();
 
-                WriteLine($"Input: {s}");
+                Console.WriteLine($"Input: {s}");
                 byte[] encrypted = Encrypt(s, publicKey);
-                WriteLine($"Encrypted: {GetBytesString(encrypted)}");
+                Console.WriteLine($"Encrypted: {Utils.GetBytesString(encrypted)}");
                 string decrypted = Decrypt(encrypted, privateKey);
-                WriteLine($"Decrypted: {decrypted}");
-                WriteLine("+------------------------------------------------+");
+                Console.WriteLine($"Decrypted: {decrypted}");
+                Console.WriteLine("+------------------------------------------------+");
             }
 
             Run("Hello world");
