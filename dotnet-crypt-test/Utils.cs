@@ -37,6 +37,14 @@ namespace dotnet_crypt_test
             return r;
         }
 
+        public static byte[] HashSha256(byte[] data)
+        {
+            using (var h = SHA256.Create())
+            {
+                return h.ComputeHash(data);
+            }
+        }
+
         public static T Measure<T>(Func<T> f)
         {
             var sw = Stopwatch.StartNew();

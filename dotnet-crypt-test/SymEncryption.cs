@@ -80,6 +80,5 @@ namespace dotnet_crypt_test
             Run("Hello world");
             Run("Hello world2");
         }
-
     }
 }

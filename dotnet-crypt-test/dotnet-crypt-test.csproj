@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsymEncryption.cs" />
+    <Compile Include="Signature.cs" />
     <Compile Include="SymEncryption.cs" />
     <Compile Include="PBKDF2.cs" />
     <Compile Include="Hashing.cs" />
